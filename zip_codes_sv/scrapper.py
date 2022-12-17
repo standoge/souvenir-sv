@@ -25,6 +25,9 @@ class Scrapper:
     soup:object
 
     def __init__(self,departament:Departament):
+        self.__url = "https://www.listasal.info/municipios/{}.shtml"
+        self.url_definition(departament)
+        self.souping()
 
 
     def url_definition(self,dep:str) -> str:
