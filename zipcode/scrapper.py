@@ -19,18 +19,18 @@ class Departament(Enum):
     san_miguel = "sm"
     usulutan = "us"
     la_union = "un"
-    
-class Scrapper:
-    __url:str
-    soup:object
 
-    def __init__(self,departament:Departament):
+
+class Scrapper:
+    __url: str
+    soup: object
+
+    def __init__(self, departament: Departament):
         self.__url = "https://www.listasal.info/municipios/{}.shtml"
         self.url_definition(departament)
         self.souping()
 
-
-    def url_definition(self,dep:str) -> str:
+    def url_definition(self, dep: str) -> str:
 
         self.__url = self.__url.format(dep)
 
@@ -43,7 +43,7 @@ class Scrapper:
         except requests.exceptions.ConnectionError as e:
             print(f"It's wouldn't continue 'cause url is wrong")
         else:
-            soup_object = BeautifulSoup(request_object.text,"html.parser")
+            soup_object = BeautifulSoup(request_object.text, "html.parser")
             self.soup = soup_object
 
     def zip_codes() -> dict[str]:
@@ -51,4 +51,3 @@ class Scrapper:
 
     def summary() -> str:
         pass
-
