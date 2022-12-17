@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Departaments(Enum):
+class Departament(Enum):
     ahuchapan = "ah"
     sonsonate = "so"
     santa_ana = "sa"
@@ -20,4 +20,19 @@ class Departaments(Enum):
     usulutan = "us"
     la_union = "un"
     
+class Scrapper:
+    self.__url
+
+
+    def __init__(self,departament:Departament):
+        pass
+
+    def souping() -> object:
+        pass
+
+    def zip_codes() -> dict[str]:
+        pass
+
+    def summary() -> str:
+        pass
 
