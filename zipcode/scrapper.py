@@ -19,17 +19,19 @@ class Departament(Enum):
     san_miguel = "sm"
     usulutan = "us"
     la_union = "un"
-    
-class Scrapper:
-    __url:str = "https://www.listasal.info/municipios/{}.shtml"
-    soup:object
 
-    def __init__(self,departament:Departament):
+
+class Scrapper:
+    __url: str = "https://www.listasal.info/municipios/{}.shtml"
+    __soup: object
+    sumamry: str
+    zip_codes: dict[str]
+
+    def __init__(self, departament: Departament) -> None:
         self.url_definition(departament)
         self.souping()
 
-
-    def url_definition(self,dep:str) -> str:
+    def url_definition(self, dep: str) -> str:
         """Concat base ulr with departament endpoint"""
         self.__url = self.__url.format(dep)
 
@@ -42,27 +44,27 @@ class Scrapper:
         except requests.exceptions.ConnectionError as e:
             print(f"It's wouldn't continue 'cause url is wrong")
         else:
-            soup_object = BeautifulSoup(request_object.text,"html.parser")
-            self.soup = soup_object
+            soup_object = BeautifulSoup(request_object.text, "html.parser")
+            self.__soup = soup_object
 
-    def summary(self,soup) -> str:
+    @property
+    def summary(self) -> str:
         """Returns a summary of municipalities and extra info about them"""
-        summary = soup.find("div",attrs={"class":"articulo"})
-        return summary.p.text   
+        summary = self.__soup.find("div", attrs={"class": "articulo"})
+        return summary.p.text
 
-    def zip_codes(self,soup) -> dict[str]:
+    @property
+    def zip_codes(self) -> dict[str]:
         """Returns a dict with all zip codes and their respective municipalities"""
         municipalities = dict()
 
-        tuples = soup.find("table",attrs={"class":"datatable"}).find_all("tr")
-        
+        tuples = self.__soup.find("table", attrs={"class": "datatable"}).find_all("tr")
+
         l = len(tuples)
-        for i in range(1,l):
-            
+        for i in range(1, l):
+
             munname = tuples[i].find("td").text
-            municipalities[munname] = tuples[i].find_all("td")[3].text    
-        
-        municipalities['Summary'] = get_summary(soup) 
-        return municipalitiespass
+            municipalities[munname] = tuples[i].find_all("td")[3].text
 
-
+        municipalities["Summary"] = self.summary(soup)
+        return municipalities
