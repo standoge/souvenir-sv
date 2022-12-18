@@ -21,7 +21,7 @@ class Endpoint(Enum):
     la_union = "un"
 
 
-class Departament:
+class Department:
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str
