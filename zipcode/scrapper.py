@@ -45,9 +45,10 @@ class Scrapper:
             soup_object = BeautifulSoup(request_object.text,"html.parser")
             self.soup = soup_object
 
-    def summary(self) -> str:
+    def summary(self,soup) -> str:
         """Returns a summary of municipalities and extra info about them"""
-          
+        summary = soup.find("div",attrs={"class":"articulo"})
+        return summary.p.text   
 
     def zip_codes(self,soup) -> dict[str]:
         """Returns a dict with all zip codes and their respective municipalities"""
