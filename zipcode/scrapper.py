@@ -66,5 +66,5 @@ class Scrapper:
             munname = tuples[i].find("td").text
             municipalities[munname] = tuples[i].find_all("td")[3].text
 
-        municipalities["Summary"] = self.summary(soup)
+        municipalities["Summary"] = self.summary(self.__soup)
         return municipalities
