@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Departament(Enum):
+class Endpoint(Enum):
     ahuchapan = "ah"
     sonsonate = "so"
     santa_ana = "sa"
@@ -21,13 +21,13 @@ class Departament(Enum):
     la_union = "un"
 
 
-class Scrapper:
+class Departament:
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str
     zip_codes: dict[str]
 
-    def __init__(self, departament: Departament) -> None:
+    def __init__(self, departament: Endpoint) -> None:
         self.url_definition(departament)
         self.souping()
 
@@ -66,5 +66,5 @@ class Scrapper:
             munname = tuples[i].find("td").text
             municipalities[munname] = tuples[i].find_all("td")[3].text
 
-        municipalities["Summary"] = self.summary(self.__soup)
+        municipalities["Summary"] = self.summary
         return municipalities
