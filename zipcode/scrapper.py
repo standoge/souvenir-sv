@@ -21,17 +21,16 @@ class Departament(Enum):
     la_union = "un"
     
 class Scrapper:
-    __url:str
+    __url:str = "https://www.listasal.info/municipios/{}.shtml"
     soup:object
 
     def __init__(self,departament:Departament):
-        self.__url = "https://www.listasal.info/municipios/{}.shtml"
         self.url_definition(departament)
         self.souping()
 
 
     def url_definition(self,dep:str) -> str:
-
+        """Concat base ulr with departament endpoint"""
         self.__url = self.__url.format(dep)
 
     def souping(self) -> object:
@@ -47,8 +46,10 @@ class Scrapper:
             self.soup = soup_object
 
     def zip_codes() -> dict[str]:
+        """Returns a dict with all zip codes and their respective municipalities"""
         pass
 
     def summary() -> str:
+        """Returns a summary of municipalities and extra info about them"""
         pass
 
