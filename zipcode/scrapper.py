@@ -45,11 +45,23 @@ class Scrapper:
             soup_object = BeautifulSoup(request_object.text,"html.parser")
             self.soup = soup_object
 
-    def zip_codes() -> dict[str]:
-        """Returns a dict with all zip codes and their respective municipalities"""
-        pass
-
-    def summary() -> str:
+    def summary(self) -> str:
         """Returns a summary of municipalities and extra info about them"""
-        pass
+          
+
+    def zip_codes(self,soup) -> dict[str]:
+        """Returns a dict with all zip codes and their respective municipalities"""
+        municipalities = dict()
+
+        tuples = soup.find("table",attrs={"class":"datatable"}).find_all("tr")
+        
+        l = len(tuples)
+        for i in range(1,l):
+            
+            munname = tuples[i].find("td").text
+            municipalities[munname] = tuples[i].find_all("td")[3].text    
+        
+        municipalities['Summary'] = get_summary(soup) 
+        return municipalitiespass
+
 
