@@ -37,12 +37,13 @@ class Departament:
 
     def souping(self) -> object:
         """
-        Returns a soup object after pass through try-catch to valididate url source is up
+        Returns a soup object after pass through try-catch to valididate
+        if url source is up
         """
         try:
             request_object = requests.get(self.__url)
         except requests.exceptions.ConnectionError as e:
-            print(f"It's wouldn't continue 'cause url is wrong")
+            print(f"It's wouldn't continue 'cause url is wrong {e}")
         else:
             soup_object = BeautifulSoup(request_object.text, "html.parser")
             self.__soup = soup_object
@@ -56,12 +57,12 @@ class Departament:
     @property
     def zip_codes(self) -> dict[str]:
         """Returns a dict with all zip codes and their respective municipalities"""
-        municipalities = dict()
+        municipalities = {}
 
         tuples = self.__soup.find("table", attrs={"class": "datatable"}).find_all("tr")
 
-        l = len(tuples)
-        for i in range(1, l):
+        municipalities_count = len(tuples)
+        for i in range(1, municipalities_count):
 
             munname = tuples[i].find("td").text
             municipalities[munname] = tuples[i].find_all("td")[3].text
