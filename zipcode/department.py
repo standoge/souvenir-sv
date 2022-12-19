@@ -26,7 +26,7 @@ class Department:
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str
-    zip_codes: Dict[str,str]
+    zip_codes: Dict[str, str]
 
     def __init__(self, departament: Endpoint) -> None:
         self.url_definition(departament)
@@ -56,7 +56,7 @@ class Department:
         return summary.p.text
 
     @property
-    def zip_codes(self) -> Dict[str,str]:
+    def zip_codes(self) -> Dict[str, str]:
         """Returns a dict with all zip codes and their respective municipalities"""
         municipalities = {}
 
