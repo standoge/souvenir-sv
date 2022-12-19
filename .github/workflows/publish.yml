@@ -22,6 +22,13 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4.3.1
       - name: Install dependencies
-        run: python -m pip install --upgrade pip && pip install black
+        run: python -m pip install --upgrade pip && pip install black twine
       - name: Format code
         run: black .
+      - name: Build package
+        run: python setup.py sdist
+      - name: Publish package  
+        # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
