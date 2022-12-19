@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 class Endpoint(Enum):
-    ahuchapan = "ah"
+    ahuachapan = "ah"
     sonsonate = "so"
     santa_ana = "sa"
     cabanas = "ca"
