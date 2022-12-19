@@ -5,7 +5,7 @@ readme = open("./README.md", "r")
 setup(
     name="zipcode-sv",
     package=["zipcode-sv"],
-    version="1.1.0",
+    version="1.1.1",
     description="Package to get El Salvador zipcodes scrapping it",
     long_description=readme.read(),
     long_description_content_type="text/markdown",

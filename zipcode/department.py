@@ -1,3 +1,4 @@
+from typing import Dict
 from enum import Enum
 
 import requests
@@ -25,17 +26,17 @@ class Department:
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str
-    zip_codes: dict[str]
+    zip_codes: Dict[str,str]
 
     def __init__(self, departament: Endpoint) -> None:
         self.url_definition(departament)
         self.souping()
 
-    def url_definition(self, dep: str) -> str:
+    def url_definition(self, dep: str) -> None:
         """Concat base ulr with departament endpoint"""
         self.__url = self.__url.format(dep)
 
-    def souping(self) -> object:
+    def souping(self) -> None:
         """
         Returns a soup object after pass through try-catch to valididate
         if url source is up
@@ -55,7 +56,7 @@ class Department:
         return summary.p.text
 
     @property
-    def zip_codes(self) -> dict[str]:
+    def zip_codes(self) -> Dict[str,str]:
         """Returns a dict with all zip codes and their respective municipalities"""
         municipalities = {}
 
