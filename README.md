@@ -4,16 +4,12 @@ This Python package scrapes [this web](https://www.listasal.info/articulos/codig
 
 ## Install 🛠️
 
----
-
 This package is in **PIP**, so you can install it as a dependency:
 
 ```python
 pip install zipcode-sv
 ```
 ## How to use 🪐
-
----
 
 ```python
 from zipcode.department import Department, Endpoint
