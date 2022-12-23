@@ -4,6 +4,7 @@ from enum import Enum
 import requests
 from bs4 import BeautifulSoup
 
+__version__ = "1.1.1"
 
 class Endpoint(Enum):
     ahuachapan = "ah"
