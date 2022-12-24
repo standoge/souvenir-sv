@@ -31,6 +31,5 @@ jobs:
         # uses: Commandcracker/pypi-publish@v1 
         run: twine upload --repository pypi dist/*
         with:
-         username: standoge
          password: ${{ secrets.PYPI_API_TOKEN }}
          github_token: ${{ secrets.GITHUB_TOKEN }}
