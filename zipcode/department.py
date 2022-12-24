@@ -8,6 +8,7 @@ from enum import Enum
 import requests
 from bs4 import BeautifulSoup
 
+
 class Endpoint(Enum):
     ahuachapan = "ah"
     sonsonate = "so"
@@ -41,7 +42,7 @@ class Department:
 
     def souping(self) -> None:
         """
-        Returns a soup object after pass through try-catch to valididate
+        Return a soup object after pass through try-catch to valididate
         if url source is up
         """
         try:
@@ -54,13 +55,13 @@ class Department:
 
     @property
     def summary(self) -> str:
-        """Returns a summary of municipalities and extra info about them"""
+        """Return a summary of municipalities and extra info about them"""
         summary = self.__soup.find("div", attrs={"class": "articulo"})
         return summary.p.text
 
     @property
     def zip_codes(self) -> Dict[str, str]:
-        """Returns a dict with all zip codes and their respective municipalities"""
+        """Return a dict with all zip codes and their respective municipalities"""
         municipalities = {}
 
         tuples = self.__soup.find("table", attrs={"class": "datatable"}).find_all("tr")
