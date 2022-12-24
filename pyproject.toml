@@ -1,11 +1,23 @@
+# install/build dependencies
 [build-system]
 requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
+# defines download import
 [project]
-name = "zipcode"
+name = "zipcode-sv"
 authors = [{name = "standoge", email = "stanlydoge@gmail.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
 dynamic = ["version", "description"]
+# execution dependencies
+dependencies = ["beautifulsoup4==4.11.1","requests==2.28.1"]
+
+# defines module import
+[tool.flit.module]
+name = "zipcode"
+
+# metadata
+[project.urls]
+Home = "https://github.com/standoge/zipcode-sv"
