@@ -10,9 +10,12 @@ authors = [{name = "standoge", email = "stanlydoge@gmail.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
-dynamic = ["version", "description"]
 # execution dependencies
-dependencies = ["beautifulsoup4==4.11.1","requests==2.28.1"]
+dependencies = [
+"requests == 2.28.1",
+"beautifulsoup4 == 4.11.1"
+]
+dynamic = ["version", "description"]
 
 # defines module import
 [tool.flit.module]
