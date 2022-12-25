@@ -32,23 +32,6 @@ class Department:
         self.url_definition(departament)
         self.souping()
 
-    def url_definition(self, dep: str) -> None:
-        """Concat base ulr with departament endpoint"""
-        self.__url = self.__url.format(dep)
-
-    def souping(self) -> None:
-        """
-        Return a soup object after pass through try-catch to valididate
-        if url source is up
-        """
-        try:
-            request_object = requests.get(self.__url)
-        except requests.exceptions.ConnectionError as e:
-            print(f"It's wouldn't continue 'cause url is wrong {e}")
-        else:
-            soup_object = BeautifulSoup(request_object.text, "html.parser")
-            self.__soup = soup_object
-
     @property
     def summary(self) -> str:
         """Return a summary of municipalities and extra info about them"""
@@ -70,3 +53,20 @@ class Department:
 
         municipalities["Summary"] = self.summary
         return municipalities
+
+    def url_definition(self, dep: str) -> None:
+        """Concat base ulr with departament endpoint"""
+        self.__url = self.__url.format(dep)
+
+    def souping(self) -> None:
+        """
+        Return a soup object after pass through try-catch to valididate
+        if url source is up
+        """
+        try:
+            request_object = requests.get(self.__url)
+        except requests.exceptions.ConnectionError as e:
+            print(f"It's wouldn't continue 'cause url is wrong {e}")
+        else:
+            soup_object = BeautifulSoup(request_object.text, "html.parser")
+            self.__soup = soup_object
