@@ -1,12 +1,12 @@
 # Zip codes El Salvador
 
-This Python package scrapes [this web](https://www.listasal.info/articulos/codigo-postal-el-salvador.shtml) to get zip codes by municipality. It uses Requests with BeautifulSoup to extract that information, which is returned as a dict or JSON.
+This Python package scrapes [this web](https://www.listasal.info/articulos/codigo-postal-el-salvador.shtml) to get zip codes by municipality. It uses Requests with BeautifulSoup to extract that information, which is returned as a dictionary or JSON.
 
 ## Install 🛠️
 
 This package can be installed with **PIP** as a dependency:
 
-```python
+```bash
 pip install zipcode-sv
 ```
 
@@ -19,11 +19,11 @@ from zipcode.department import Department, Endpoint
 You have to import `Department`, which is the main class to scrap the zip codes. `Endpoint` is an Enum with El Salvador's departments to select from which one you want to get their municipalities with their zip codes.
 
 ```python
-# returns endpoint to extract data in web source
+# return endpoint to extract data in web source
 my_department = Endpoint.san_salvador.value
 # scrapes web source to get municipalities with its zip codes
 san_salvador_zipcodes = Department(my_department)
-# returs a dict with municipalities and its zip codes
+# retur a dict with municipalities and its zip codes
 san_salvador_zipcodes.zip_codes
 ```
 
@@ -53,3 +53,5 @@ You must expect a dictionary like this.
   "Summary": "San Salvador es un departamento fundado en 1525 ubicado en la Zona Central de El Salvador. Posee 3 distritos y 19 municipios."
 }
 ```
+----
+Enjoy :bamboo:
