@@ -35,8 +35,16 @@ class Department:
     @property
     def summary(self) -> str:
         """Return a summary of municipalities and extra info about them"""
+    
         summary = self.__soup.find("div", attrs={"class": "articulo"})
+
+        if summary is None:
+            print("Resource wasn't found")
+            # this is for unittest checking
+            return None
+
         return summary.p.text
+
 
     @property
     def zip_codes(self) -> Dict[str, str]:
