@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 
 # defines download import
 [project]
-name = "zipcode-sv"
+name = "souvenir-sv"
 authors = [{name = "standoge", email = "stanlydoge@gmail.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -19,7 +19,7 @@ dynamic = ["version", "description"]
 
 # defines module import
 [tool.flit.module]
-name = "zipcode"
+name = "souvenir"
 
 # metadata
 [project.urls]
