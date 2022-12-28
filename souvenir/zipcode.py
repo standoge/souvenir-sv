@@ -22,7 +22,7 @@ class Endpoint(Enum):
     la_union = "un"
 
 
-class Department:
+class Zipcode:
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str
