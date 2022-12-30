@@ -24,7 +24,6 @@ class TestComponent(unittest.TestCase):
         """
         self.assertNotEqual(self.zip.summary, None)
 
-
     def test_zipcodes(self):
         """
         Test if method returns None type, it mean that array with
@@ -32,12 +31,10 @@ class TestComponent(unittest.TestCase):
         """
         self.assertNotEqual(self.zip.zip_codes, None)
 
-
     def test_bing_images(self):
         """Test if result are not None or empty array."""
         self.assertNotEqual(self.image_bing.images, None)
         self.assertNotEqual(self.image_bing.images, [])
-
 
     @unittest.skip("Google API is not free anymore")
     def test_google_images(self):
