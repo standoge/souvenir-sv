@@ -35,7 +35,6 @@ class Zipcode:
     @property
     def summary(self) -> str:
         """Return a summary of municipalities and extra info about them"""
-
         summary = self.__soup.find("div", attrs={"class": "articulo"})
 
         if summary is None:
@@ -48,29 +47,29 @@ class Zipcode:
     @property
     def zip_codes(self) -> Dict[str, str]:
         """Return a dict with all zip codes and their respective municipalities"""
-        municipalities = {}
+        municipalities: Dict[str:str] = {}
 
         try:
             tuples = self.__soup.find("table", attrs={"class": "datatable"}).find_all(
                 "tr"
             )
-        except AttributeError as e:
+        except AttributeError:
             print("There aren't elements with <tr> labels")
-        else:
-            municipalities_count = len(tuples)
 
-            if municipalities_count == 0:
-                print("Resource wasn't found")
-                # this is for unittest checking
-                return None
+        municipalities_count = len(tuples)
 
-            for i in range(1, municipalities_count):
+        if municipalities_count == 0:
+            print("Resource wasn't found")
+            # this is for unittest checking
+            return None
 
-                munname = tuples[i].find("td").text
-                municipalities[munname] = tuples[i].find_all("td")[3].text
+        for i in range(1, municipalities_count):
 
-            municipalities["Summary"] = self.summary
-            return municipalities
+            munname = tuples[i].find("td").text
+            municipalities[munname] = tuples[i].find_all("td")[3].text
+
+        municipalities["Summary"] = self.summary
+        return municipalities
 
     def url_definition(self, dep: str) -> None:
         """Concat base ulr with departament endpoint"""
