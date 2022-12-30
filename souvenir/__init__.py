@@ -1,3 +1,3 @@
 """A package to get zipcodes from El Salvador departments"""
 
-__version__ = "1.1.4"
+__version__ = "2.0.0"

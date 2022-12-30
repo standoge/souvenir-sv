@@ -34,7 +34,7 @@ class Zipcode:
 
     @property
     def summary(self) -> str:
-        """Return a summary of municipalities and extra info about them"""
+        """Return a summary of municipalities and extra info about them."""
         summary = self.__soup.find("div", attrs={"class": "articulo"})
 
         if summary is None:
@@ -46,7 +46,7 @@ class Zipcode:
 
     @property
     def zip_codes(self) -> Dict[str, str]:
-        """Return a dict with all zip codes and their respective municipalities"""
+        """Return a dict with all zip codes and their respective municipalities."""
         municipalities: Dict[str:str] = {}
 
         try:
@@ -78,7 +78,7 @@ class Zipcode:
     def souping(self) -> None:
         """
         Return a soup object after pass through try-catch to valididate
-        if url source is up
+        if url source is up.
         """
         try:
             request_object = requests.get(self.__url)

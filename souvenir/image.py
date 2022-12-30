@@ -9,6 +9,10 @@ class Image(abc.ABC):
         self.departament = self.__switcher(endpoint)
 
     def __switcher(self, endpoint: str):
+        """
+        Connect endpoints used for zipcode module
+        with departaments names for image search.
+        """
         switch = {
             "ah": "ahuchapan",
             "so": "sonsonate",
@@ -29,6 +33,7 @@ class Image(abc.ABC):
 
     @abc.abstractclassmethod
     def images():
+        """Return a list of images urls."""
         raise NotImplementedError
 
 
@@ -38,6 +43,7 @@ class ImageBing(Image):
 
     @property
     def images(self, image_limit: int = 18):
+        """Return a list of images urls."""
         return bing_image_urls(
             f"El Salvador departamento {self.departament}", limit=image_limit
         )
@@ -50,6 +56,7 @@ class ImageGoogle(Image):
 
     @property
     def images(self):
+        """Return a list of images urls."""
         params = {
             "q": f"El Salvador departamento {self.departament}",
             "gl": "us",
