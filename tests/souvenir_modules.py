@@ -1,7 +1,14 @@
 import unittest
 
-from souvenir.zipcode import Endpoint, Zipcode, ImageBing, ImageGoogle
+from souvenir.zipcode import (
+        Endpoint,
+        Zipcode,
+    )
 
+from souvenir.image import (
+        ImageBing,
+        ImageGoogle
+)
 
 class TestComponent(unittest.TestCase):
     def setUp(self):
@@ -29,3 +36,18 @@ class TestComponent(unittest.TestCase):
         HTML labels match doesn't exist in filter argument used.
         """
         self.assertNotEqual(self.zip.zip_codes, None)
+    
+    def test_bing_images(self):
+        """
+        Test if result are not None or empty array.
+        """
+        self.assertNotEqual(self.image_bing.images, None)
+        self.assertNotEqual(self.image_bing.images, [])
+    
+    @unittest.skip("Google API is not free anymore")
+    def test_google_images(self):
+        """
+        Test if result are not None or empty array.
+        """
+        self.assertNotEqual(self.image_google.images, None)
+        self.assertNotEqual(self.image_google.images, [])
