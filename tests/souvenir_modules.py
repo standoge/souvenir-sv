@@ -1,7 +1,10 @@
+import os
 import unittest
 
 from souvenir.zipcode import Endpoint, Zipcode
 from souvenir.image import ImageBing, ImageGoogle
+
+G_KEY = os.environ.get("G_KEY")
 
 
 class TestComponent(unittest.TestCase):
@@ -10,7 +13,7 @@ class TestComponent(unittest.TestCase):
         self.my_dep = Endpoint.san_vicente.value
         self.zip = Zipcode(self.my_dep)
         self.image_bing = ImageBing(self.my_dep)
-        self.image_google = ImageGoogle(self.my_dep)
+        self.image_google = ImageGoogle(self.my_dep, G_KEY)
 
     def test_enumeration(self):
         """Test if Enum has 14 values regarded to 14 departments."""

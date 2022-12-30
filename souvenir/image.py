@@ -1,4 +1,3 @@
-import os
 import abc
 
 from bing_image_urls import bing_image_urls
@@ -47,7 +46,7 @@ class ImageBing(Image):
 class ImageGoogle(Image):
     def __init__(self, endpoint: str, key: str):
         super().__init__(endpoint)
-        self.__key: str
+        self.__key: str = key
 
     @property
     def images(self):
