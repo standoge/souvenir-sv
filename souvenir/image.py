@@ -8,6 +8,7 @@ class Image(abc.ABC):
     def __init__(self, endpoint: str):
         self.departament = self.__switcher(endpoint)
 
+    @staticmethod
     def __switcher(self, endpoint: str):
         """
         Connect endpoints used for zipcode module
@@ -31,10 +32,10 @@ class Image(abc.ABC):
         }
         return switch.get(endpoint, "Invalid value")
 
+    @property
     @abc.abstractclassmethod
-    def images():
+    def images(self):
         """Return a list of images urls."""
-        raise NotImplementedError
 
 
 class ImageBing(Image):
@@ -42,11 +43,9 @@ class ImageBing(Image):
         super().__init__(endpoint)
 
     @property
-    def images(self, image_limit: int = 18):
-        """Return a list of images urls."""
-        return bing_image_urls(
-            f"El Salvador departamento {self.departament}", limit=image_limit
-        )
+    def images(self):
+        """Return a list of images urls from Bing engine."""
+        return bing_image_urls(f"El Salvador departamento {self.departament}", limit=30)
 
 
 class ImageGoogle(Image):
@@ -56,7 +55,7 @@ class ImageGoogle(Image):
 
     @property
     def images(self):
-        """Return a list of images urls."""
+        """Return a list of images urls from Google engine."""
         params = {
             "q": f"El Salvador departamento {self.departament}",
             "gl": "us",
