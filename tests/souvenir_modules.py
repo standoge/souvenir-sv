@@ -1,3 +1,7 @@
+"""
+To test just execute `python -m unittest -v tests/souvenir_modules.py`
+"""
+
 import os
 import unittest
 
