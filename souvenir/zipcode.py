@@ -6,6 +6,11 @@ from bs4 import BeautifulSoup
 
 
 class Endpoint(Enum):
+    """
+    Enumeration to map the name of the department to be scraped with
+    the web endpoint with the content to be scraped.
+    """
+
     ahuachapan = "ah"
     sonsonate = "so"
     santa_ana = "sa"
@@ -23,6 +28,8 @@ class Endpoint(Enum):
 
 
 class Zipcode:
+    """Class to get zip codes from El Salvador."""
+
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str

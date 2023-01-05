@@ -1,10 +1,13 @@
 import abc
+from typing import List
 
 from bing_image_urls import bing_image_urls
 from serpapi import GoogleSearch
 
 
 class Image(abc.ABC):
+    """Abstract class for image search engines."""
+
     def __init__(self, endpoint: str):
         self.departament = self.__switcher(endpoint)
 
@@ -31,32 +34,34 @@ class Image(abc.ABC):
         }
         return switch.get(endpoint, "Invalid value")
 
+    @property
     @abc.abstractclassmethod
-    def images():
+    def images(self):
         """Return a list of images urls."""
-        raise NotImplementedError
 
 
 class ImageBing(Image):
+    """Class to get images urls from Bing engine."""
+
     def __init__(self, endpoint: str):
         super().__init__(endpoint)
 
     @property
-    def images(self, image_limit: int = 18):
-        """Return a list of images urls."""
-        return bing_image_urls(
-            f"El Salvador departamento {self.departament}", limit=image_limit
-        )
+    def images(self) -> List[str]:
+        """Return a list of images urls"""
+        return bing_image_urls(f"El Salvador departamento {self.departament}", limit=30)
 
 
 class ImageGoogle(Image):
+    """Class to get images urls from Google engine."""
+
     def __init__(self, endpoint: str, key: str):
         super().__init__(endpoint)
         self.__key: str = key
 
     @property
-    def images(self):
-        """Return a list of images urls."""
+    def images(self) -> List[str]:
+        """Return a list of images urls"""
         params = {
             "q": f"El Salvador departamento {self.departament}",
             "gl": "us",
