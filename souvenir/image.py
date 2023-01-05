@@ -7,6 +7,7 @@ from serpapi import GoogleSearch
 
 class Image(abc.ABC):
     """Abstract class for image search engines."""
+
     def __init__(self, endpoint: str):
         self.departament = self.__switcher(endpoint)
 
@@ -41,6 +42,7 @@ class Image(abc.ABC):
 
 class ImageBing(Image):
     """Class to get images urls from Bing engine."""
+
     def __init__(self, endpoint: str):
         super().__init__(endpoint)
 
@@ -52,6 +54,7 @@ class ImageBing(Image):
 
 class ImageGoogle(Image):
     """Class to get images urls from Google engine."""
+
     def __init__(self, endpoint: str, key: str):
         super().__init__(endpoint)
         self.__key: str = key
