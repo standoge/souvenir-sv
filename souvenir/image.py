@@ -1,3 +1,5 @@
+from random import randint
+
 import abc
 from typing import List
 
@@ -49,7 +51,7 @@ class ImageBing(Image):
     @property
     def images(self) -> List[str]:
         """Return a list of images urls"""
-        return bing_image_urls(f"El Salvador departamento {self.departament}", limit=30)
+        return bing_image_urls(query=f"El Salvador {self.departament}", page_counter=randint(0,10), limit=30)
 
 
 class ImageGoogle(Image):
@@ -63,7 +65,7 @@ class ImageGoogle(Image):
     def images(self) -> List[str]:
         """Return a list of images urls"""
         params = {
-            "q": f"El Salvador departamento {self.departament}",
+            "q": f"El Salvador {self.departament}",
             "gl": "us",
             "hl": "en",
             "tbm": "isch",
