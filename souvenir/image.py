@@ -51,7 +51,11 @@ class ImageBing(Image):
     @property
     def images(self) -> List[str]:
         """Return a list of images urls"""
-        return bing_image_urls(query=f"El Salvador {self.departament}", page_counter=randint(0,10), limit=30)
+        return bing_image_urls(
+            query=f"El Salvador {self.departament}",
+            page_counter=randint(0, 10),
+            limit=30,
+        )
 
 
 class ImageGoogle(Image):

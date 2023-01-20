@@ -13,7 +13,7 @@ pip install souvenir-sv
 
 ```python
 # for department/municipalities zip-codes scraper
-from souvenir.zipcode import Endpoint, Zipcode 
+from souvenir.zipcode import Endpoint, Zipcode
 # for department images scraper
 from souvenir.image import ImageBing, ImageGoogle
 ```
@@ -58,18 +58,16 @@ You must expect a dictionary like this.
 ```
 
 ### Images:
-You can check package's documentation from author's repositories. 
+You can check package's documentation from author's repositories.
 [ImageBing](https://github.com/ffreemt/bing-image-urls) and [ImageGoogle](https://github.com/arrrlo/Google-Images-Search).
 
 ```python
 # this step is shared with Zipcode class to choice which department scrape
 my_department:str = Endpoint.san_salvador.value
-
 # return urls from Bing engine
 bing_images:List[str] = ImageBing(my_department).images
-
 # return urls from Google engine
-google_images:List[str] = ImageBIng(my_department,api_key).images
+google_images:List[str] = ImageGoogle(my_department,api_key).images
 ```
 
 ----
