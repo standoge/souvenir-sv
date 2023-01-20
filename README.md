@@ -17,7 +17,6 @@ from souvenir.zipcode import Endpoint, Zipcode
 # for department images scraper
 from souvenir.image import ImageBing, ImageGoogle
 ```
-> ImageGoogle scraper requires an API Key to work, which means that you have to sign in on the author's package website to get access to the scraper. ImageBing does not need it.
 
 ### Zip-codes:
 
@@ -60,6 +59,8 @@ You must expect a dictionary like this.
 ### Images:
 You can check package's documentation from author's repositories.
 [ImageBing](https://github.com/ffreemt/bing-image-urls) and [ImageGoogle](https://github.com/arrrlo/Google-Images-Search).
+
+> ImageGoogle scraper requires an API Key to work, which means that you have to sign in on the author's package website to get access to the scraper. ImageBing does not need it.
 
 ```python
 # this step is shared with Zipcode class to choice which department scrape
