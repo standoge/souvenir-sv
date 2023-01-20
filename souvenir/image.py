@@ -38,7 +38,7 @@ class Image(abc.ABC):
 
     @property
     @abc.abstractclassmethod
-    def images(self):
+    def images(cls):
         """Return a list of images urls."""
 
 
@@ -63,7 +63,7 @@ class ImageGoogle(Image):
 
     def __init__(self, endpoint: str, key: str):
         super().__init__(endpoint)
-        self.__key: str = key
+        self.__KEY: str = key
 
     @property
     def images(self) -> List[str]:
@@ -74,7 +74,7 @@ class ImageGoogle(Image):
             "hl": "en",
             "tbm": "isch",
             "ijn": "0",
-            "api_key": self.__key,
+            "api_key": self.__KEY,
         }
 
         search = GoogleSearch(params)
