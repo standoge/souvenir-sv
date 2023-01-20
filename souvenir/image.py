@@ -1,3 +1,4 @@
+import requests
 from random import randint
 
 import abc
@@ -56,6 +57,24 @@ class ImageBing(Image):
             page_counter=randint(0, 10),
             limit=30,
         )
+
+
+class ImageAzure(Image):
+    """Class to get images urls from OFICIAL Bing engine"""
+
+    def __init__(self, endpoint: str, key: str):
+        super().__init__(endpoint)
+        self.__KEY: str = key
+        self.__HEADERS: str = {"Ocp-Apim-Subscription-Key": self.__KEY}
+        self.__CNN_STRING: str = self.__KEY + "/bing/v7.0/search"
+
+    @property
+    def images(self) -> List[str]:
+        """Return a list of images urls"""
+        params = {"q": f"El Salvador {self.departament}", "mkt": "es-MX"}
+
+        links = requests.get(self.__CNN_STRING, headers=self.__HEADERS, params=params)
+        return links["images"]
 
 
 class ImageGoogle(Image):
