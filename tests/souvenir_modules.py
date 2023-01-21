@@ -3,8 +3,8 @@
 import os
 import unittest
 
-from souvenir.zipcode import Endpoint, Zipcode
 from souvenir.image import ImageBing, ImageGoogle
+from souvenir.zipcode import Endpoint, Zipcode
 
 G_KEY = os.environ.get("G_KEY")
 
@@ -34,7 +34,7 @@ class TestComponent(unittest.TestCase):
         Test if method returns None type, it mean that array with
         HTML labels match doesn't exist in filter argument used.
         """
-        self.assertNotEqual(self.zip.zip_codes, None)
+        self.assertNotEqual(self.zip.codes, None)
 
     def test_bing_images(self):
         """Test if result are not None or empty array."""

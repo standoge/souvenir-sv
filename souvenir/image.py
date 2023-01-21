@@ -1,6 +1,6 @@
 import abc
 from random import randint
-from typing import List
+from typing import List, Dict
 
 import requests
 from bing_image_urls import bing_image_urls
@@ -11,30 +11,7 @@ class Image(abc.ABC):
     """Abstract class for image search engines."""
 
     def __init__(self, endpoint: str):
-        self.departament = self.__switcher(endpoint)
-
-    def __switcher(self, endpoint: str):
-        """
-        Connect endpoints used for zipcode module
-        with departaments names for image search.
-        """
-        switch = {
-            "ah": "ahuchapan",
-            "so": "sonsonate",
-            "sa": "santa ana",
-            "ca": "cabañas",
-            "ch": "chalatenango",
-            "cu": "cuscatlan",
-            "li": "la libertad",
-            "pa": "la paz",
-            "ss": "san salvador",
-            "sv": "san vicente",
-            "mo": "morazan",
-            "sm": "san miguel",
-            "us": "usulutan",
-            "un": "la union",
-        }
-        return switch.get(endpoint, "Invalid value")
+        self.query = endpoint
 
     @property
     @abc.abstractclassmethod
@@ -52,7 +29,7 @@ class ImageBing(Image):
     def images(self) -> List[str]:
         """Return a list of images urls"""
         links: List[str] = bing_image_urls(
-            query=f"El Salvador {self.departament}",
+            query=f"El Salvador {self.query}",
             page_counter=randint(0, 10),
             limit=30,
         )
@@ -72,7 +49,7 @@ class ImageAzure(Image):
     def images(self) -> List[str]:
         """Return a list of images urls"""
         params = {
-            "q": f"El Salvador {self.departament}",
+            "q": f"El Salvador {self.query}",
             "count": 100,
             "safeSearch": "Moderate",
         }
@@ -80,8 +57,8 @@ class ImageAzure(Image):
         response: object = requests.get(
             self.__ENDPOINT, headers=self.__HEADERS, params=params
         )
-        images: List[str] = response.json()["value"]
-        links: List[str] = [image["contentUrl"] for image in images]
+        images: List[Dict[str]] = response.json()["value"]
+        links: List[Dict[str]] = [image["contentUrl"] for image in images]
         return links
 
 
@@ -96,7 +73,7 @@ class ImageGoogle(Image):
     def images(self) -> List[str]:
         """Return a list of images urls"""
         params = {
-            "q": f"El Salvador {self.departament}",
+            "q": f"El Salvador {self.query}",
             "gl": "us",
             "hl": "en",
             "tbm": "isch",
