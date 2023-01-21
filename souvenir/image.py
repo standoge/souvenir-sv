@@ -38,7 +38,7 @@ class Image(abc.ABC):
 
     @property
     @abc.abstractclassmethod
-    def images(cls):
+    def images(cls) -> List[str]:
         """Return a list of images urls."""
 
 
@@ -51,11 +51,12 @@ class ImageBing(Image):
     @property
     def images(self) -> List[str]:
         """Return a list of images urls"""
-        return bing_image_urls(
+        links: List[str] = bing_image_urls(
             query=f"El Salvador {self.departament}",
             page_counter=randint(0, 10),
             limit=30,
         )
+        return links
 
 
 class ImageAzure(Image):
@@ -76,9 +77,11 @@ class ImageAzure(Image):
             "safeSearch": "Moderate",
         }
 
-        response = requests.get(self.__ENDPOINT, headers=self.__HEADERS, params=params)
-        images = response.json()["value"]
-        links = [image["contentUrl"] for image in images]
+        response: object = requests.get(
+            self.__ENDPOINT, headers=self.__HEADERS, params=params
+        )
+        images: List[str] = response.json()["value"]
+        links: List[str] = [image["contentUrl"] for image in images]
         return links
 
 
@@ -101,6 +104,6 @@ class ImageGoogle(Image):
             "api_key": self.__KEY,
         }
 
-        search = GoogleSearch(params)
-        results = search.get_dict()["images_results"]
-        return results
+        response: object = GoogleSearch(params)
+        links: List[str] = response.get_dict()["images_results"]
+        return links
