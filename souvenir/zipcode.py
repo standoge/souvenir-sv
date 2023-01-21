@@ -1,5 +1,5 @@
-from typing import Dict
 from enum import Enum
+from typing import Dict
 
 import requests
 from bs4 import BeautifulSoup
@@ -33,7 +33,7 @@ class Zipcode:
     __url: str = "https://www.listasal.info/municipios/{}.shtml"
     __soup: object
     sumamry: str
-    zip_codes: Dict[str, str]
+    codes: Dict[str, str]
 
     def __init__(self, departament: Endpoint) -> None:
         self.url_definition(departament)
@@ -52,7 +52,7 @@ class Zipcode:
         return summary.p.text
 
     @property
-    def zip_codes(self) -> Dict[str, str]:
+    def codes(self) -> Dict[str, str]:
         """Return a dict with all zip codes and their respective municipalities."""
         municipalities: Dict[str:str] = {}
 
