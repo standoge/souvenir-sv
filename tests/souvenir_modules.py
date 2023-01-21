@@ -6,10 +6,12 @@ import unittest
 from souvenir.image import ImageBing, ImageGoogle
 from souvenir.zipcode import Endpoint, Zipcode
 
-G_KEY = os.environ.get("G_KEY")
+G_KEY = os.environ["G_KEY"]
 
 
 class TestComponent(unittest.TestCase):
+    """Test most important souvenir modules."""
+
     def setUp(self):
         """Generate instance of Department to test it."""
         self.my_dep = Endpoint.san_vicente.value
