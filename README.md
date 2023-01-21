@@ -23,8 +23,10 @@ from souvenir.image import ImageBing, ImageGoogle
 ```python
 # return endpoint to extract data in web source
 my_department:str = Endpoint.san_salvador.value
+
 # scrapes web source to get municipalities with its zip codes
 san_salvador_zipcodes:object = Zipcode(my_department)
+
 # retur a dict with municipalities and its zip codes
 san_salvador_zipcodes.zip_codes
 ```
@@ -65,8 +67,10 @@ You can check package's documentation from author's repositories.
 ```python
 # this step is shared with Zipcode class to choice which department scrape
 my_department:str = Endpoint.san_salvador.value
+
 # return urls from Bing engine
 bing_images:List[str] = ImageBing(my_department).images
+
 # return urls from Google engine
 google_images:List[str] = ImageGoogle(my_department,api_key).images
 ```
