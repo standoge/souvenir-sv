@@ -1,8 +1,9 @@
 import abc
 from random import randint
-from typing import List, Dict
+from typing import List, Dict, Final
 
 import requests
+from requests_cache import Session
 from bing_image_urls import bing_image_urls
 from serpapi import GoogleSearch
 
@@ -10,8 +11,13 @@ from serpapi import GoogleSearch
 class Image(abc.ABC):
     """Abstract class for image search engines."""
 
-    def __init__(self, endpoint: str):
+    def __init__(self, endpoint: str, dir: str):
         self.query = endpoint
+        self.time = 604800
+        self.cache = Session(
+            cache_name=f"cache/{dir}",
+            expire_after=self.time
+        )
 
     @property
     @abc.abstractclassmethod
