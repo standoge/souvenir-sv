@@ -1,9 +1,9 @@
 import abc
 from random import randint
-from typing import List, Dict, Final
+from typing import List, Dict
 
 import requests
-from requests_cache import Session
+from requests_cache import CachedSession
 from bing_image_urls import bing_image_urls
 from serpapi import GoogleSearch
 
@@ -11,11 +11,11 @@ from serpapi import GoogleSearch
 class Image(abc.ABC):
     """Abstract class for image search engines."""
 
-    def __init__(self, endpoint: str, dir: str):
+    def __init__(self, endpoint: str, directory: str):
         self.query = endpoint
         self.time = 604800
-        self.cache = Session(
-            cache_name=f"cache/{dir}",
+        self.cache = CachedSession(
+            cache_name=f"cache/{directory}",
             expire_after=self.time
         )
 
@@ -60,7 +60,7 @@ class ImageAzure(Image):
             "safeSearch": "Moderate",
         }
 
-        response: object = requests.get(
+        response: object = self.cache.get(
             self.__ENDPOINT, headers=self.__HEADERS, params=params
         )
         images: List[Dict[str]] = response.json()["value"]
