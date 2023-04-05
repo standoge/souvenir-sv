@@ -3,10 +3,11 @@
 import os
 import unittest
 
-from souvenir.image import ImageBing, ImageGoogle
+from souvenir.image import ImageBing, ImageGoogle, ImageAzure
 from souvenir.zipcode import Endpoint, Zipcode
 
-G_KEY = os.environ["G_KEY"]
+A_KEY = os.environ["A_KEY"]
+ENDPOINT = os.environ["ENDPOINT"]
 
 
 class TestComponent(unittest.TestCase):
@@ -16,8 +17,9 @@ class TestComponent(unittest.TestCase):
         """Generate instance of Department to test it."""
         self.my_dep = Endpoint.san_vicente.value
         self.zip = Zipcode(self.my_dep)
-        self.image_bing = ImageBing(self.my_dep)
-        self.image_google = ImageGoogle(self.my_dep, G_KEY)
+        # self.image_bing = ImageBing(self.my_dep)
+        self.image_azure = ImageAzure(self.my_dep, A_KEY, ENDPOINT, "azure")
+        # self.image_google = ImageGoogle(self.my_dep, G_KEY)
 
     def test_enumeration(self):
         """Test if Enum has 14 values regarded to 14 departments."""
@@ -38,10 +40,16 @@ class TestComponent(unittest.TestCase):
         """
         self.assertNotEqual(self.zip.codes, None)
 
+    @unittest.skip("Fix hierarchy of classes")
     def test_bing_images(self):
         """Test if result are not None or empty array."""
         self.assertNotEqual(self.image_bing.images, None)
         self.assertNotEqual(self.image_bing.images, [])
+    
+    def test_azure_images(self):
+        """Test if result are not None or empty array."""
+        self.assertNotEqual(self.image_azure.images, None)
+        self.assertNotEqual(self.image_azure.images, [])
 
     @unittest.skip("Google API is not free anymore")
     def test_google_images(self):

@@ -28,8 +28,8 @@ class Image(abc.ABC):
 class ImageBing(Image):
     """Class to get images urls from Bing engine."""
 
-    def __init__(self, endpoint: str):
-        super().__init__(endpoint)
+    def __init__(self, endpoint: str, directory: str):
+        super().__init__(endpoint, directory)
 
     @property
     def images(self) -> List[str]:
@@ -41,12 +41,11 @@ class ImageBing(Image):
         )
         return links
 
-
 class ImageAzure(Image):
     """Class to get images urls from OFICIAL Bing engine"""
 
-    def __init__(self, endpoint: str, key: str, endpoint_key: str):
-        super().__init__(endpoint)
+    def __init__(self, endpoint: str, key: str, endpoint_key: str, directory: str):
+        super().__init__(endpoint, directory)
         self.__KEY: str = key
         self.__ENDPOINT: str = endpoint_key
         self.__HEADERS: str = {"Ocp-Apim-Subscription-Key": self.__KEY}
@@ -71,8 +70,8 @@ class ImageAzure(Image):
 class ImageGoogle(Image):
     """Class to get images urls from Google engine."""
 
-    def __init__(self, endpoint: str, key: str):
-        super().__init__(endpoint)
+    def __init__(self, endpoint: str, key: str, directory: str):
+        super().__init__(endpoint, directory)
         self.__KEY: str = key
 
     @property
