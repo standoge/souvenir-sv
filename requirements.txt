@@ -8,6 +8,11 @@ anyio==3.6.2
     # via
     #   -r requirements.in
     #   httpcore
+attrs==22.2.0
+    # via
+    #   -r requirements.in
+    #   cattrs
+    #   requests-cache
 beautifulsoup4==4.11.1
     # via -r requirements.in
 bing-image-urls==0.1.5
@@ -16,6 +21,10 @@ build==0.9.0
     # via
     #   -r requirements.in
     #   pip-tools
+cattrs==22.2.0
+    # via
+    #   -r requirements.in
+    #   requests-cache
 certifi==2022.12.7
     # via
     #   -r requirements.in
@@ -30,6 +39,10 @@ click==8.1.3
     # via
     #   -r requirements.in
     #   pip-tools
+exceptiongroup==1.1.1
+    # via
+    #   -r requirements.in
+    #   cattrs
 google-search-results==2.4.1
     # via -r requirements.in
 h11==0.14.0
@@ -68,15 +81,24 @@ pep517==0.13.0
 pip-tools==6.12.1
     # via -r requirements.in
 platformdirs==2.6.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   requests-cache
 requests==2.28.1
     # via
     #   -r requirements.in
     #   google-search-results
+    #   requests-cache
+requests-cache==1.0.1
+    # via -r requirements.in
 rfc3986[idna2008]==1.5.0
     # via
     #   -r requirements.in
     #   httpx
+six==1.16.0
+    # via
+    #   -r requirements.in
+    #   url-normalize
 sniffio==1.3.0
     # via
     #   -r requirements.in
@@ -92,10 +114,15 @@ tomli==2.0.1
     #   -r requirements.in
     #   build
     #   pep517
+url-normalize==1.4.3
+    # via
+    #   -r requirements.in
+    #   requests-cache
 urllib3==1.26.13
     # via
     #   -r requirements.in
     #   requests
+    #   requests-cache
 wheel==0.38.4
     # via pip-tools
 

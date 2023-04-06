@@ -1,9 +1,9 @@
 import abc
 from random import randint
-from typing import List, Dict
+from typing import Dict, List
 
-import requests
 from bing_image_urls import bing_image_urls
+from requests_cache import CachedSession
 from serpapi import GoogleSearch
 
 
@@ -12,6 +12,7 @@ class Image(abc.ABC):
 
     def __init__(self, endpoint: str):
         self.query = endpoint
+        self.time = 604800
 
     @property
     @abc.abstractclassmethod
@@ -19,11 +20,14 @@ class Image(abc.ABC):
         """Return a list of images urls."""
 
 
-class ImageBing(Image):
+class ImageBingLimited(Image):
     """Class to get images urls from Bing engine."""
 
     def __init__(self, endpoint: str):
         super().__init__(endpoint)
+        self.cache = CachedSession(
+            cache_name=".cache/BingLimited", expire_after=self.time
+        )
 
     @property
     def images(self) -> List[str]:
@@ -36,11 +40,12 @@ class ImageBing(Image):
         return links
 
 
-class ImageAzure(Image):
+class ImageBing(Image):
     """Class to get images urls from OFICIAL Bing engine"""
 
     def __init__(self, endpoint: str, key: str, endpoint_key: str):
         super().__init__(endpoint)
+        self.cache = CachedSession(cache_name=".cache/Bing", expire_after=self.time)
         self.__KEY: str = key
         self.__ENDPOINT: str = endpoint_key
         self.__HEADERS: str = {"Ocp-Apim-Subscription-Key": self.__KEY}
@@ -54,7 +59,7 @@ class ImageAzure(Image):
             "safeSearch": "Moderate",
         }
 
-        response: object = requests.get(
+        response: object = self.cache.get(
             self.__ENDPOINT, headers=self.__HEADERS, params=params
         )
         images: List[Dict[str]] = response.json()["value"]
@@ -68,6 +73,7 @@ class ImageGoogle(Image):
     def __init__(self, endpoint: str, key: str):
         super().__init__(endpoint)
         self.__KEY: str = key
+        self.cache = CachedSession(cache_name=".cache/Google", expire_after=self.time)
 
     @property
     def images(self) -> List[str]:

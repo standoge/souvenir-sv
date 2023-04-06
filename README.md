@@ -17,7 +17,7 @@ pip install souvenir-sv
 # for department/municipalities zip-codes scraper
 from souvenir.zipcode import Endpoint, Zipcode
 # for department images scraper
-from souvenir.image import ImageBing, ImageGoogle, ImageAzure
+from souvenir.image import ImageBing, ImageGoogle, ImageBingLimited
 ```
 
 ### Zip-codes:
@@ -62,7 +62,7 @@ You must expect a dictionary like this.
 
 ### Images:
 You can check package's documentation from author's repositories.
-[ImageBing](https://github.com/ffreemt/bing-image-urls) and [ImageGoogle](https://github.com/arrrlo/Google-Images-Search). [ImageAzure](https://learn.microsoft.com/en-us/bing/search-apis/bing-image-search/reference/endpoints?source=recommendations) is an implementation of the official Bing Search Web API.
+[ImageBingLimited](https://github.com/ffreemt/bing-image-urls) and [ImageGoogle](https://github.com/arrrlo/Google-Images-Search). [ImageBing](https://learn.microsoft.com/en-us/bing/search-apis/bing-image-search/reference/endpoints?source=recommendations) is an implementation of the official Bing Search Web API. The latter class (ImageBing) have implement cache (1 week) so you can be more efficient with your requests.
 
 > ImageGoogle & ImageAzure scraper requires an API Key to work, which means that you have to sign in on the author's package website to get access to the scraper. ImageBing does not need it.
 
@@ -70,17 +70,17 @@ You can check package's documentation from author's repositories.
 # here ins't not needed use Endpoint Enum
 my_department = "La Paz"
 
-# return urls from Bing engine
-bing_images:List[str] = ImageBing(my_department).images
+# return urls from Bing engine (Limited to 30 images)
+bing_images:List[str] = ImageBingLimited(my_department).images
 
 # return urls from Google engine
 google_images:List[Dict[str]] = ImageGoogle(my_department,api_key).images
 
-# return urls from official Bing engine
-bing_images_api:List[str] = ImageAzure(my_department,api_key,endpoint)
+# return urls from official Bing engine (Limited to 100 images)
+bing_images_api:List[str] = ImageBing(my_department,api_key,endpoint)
 ```
 
-> `endpoint` parameter of ImageAzure is necessary to specify that images are to be searched for. To search for another resource, another endpoint must be used. Check official documentation.
+> `endpoint` parameter of ImageBing is necessary to specify that images are to be searched for. To search for another resource, another endpoint must be used. Check official documentation.
 
 ----
 Enjoy :bamboo:
