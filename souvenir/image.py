@@ -1,10 +1,10 @@
 import abc
 from random import randint
-from typing import List, Dict
+from typing import Dict, List
 
 import requests
-from requests_cache import CachedSession
 from bing_image_urls import bing_image_urls
+from requests_cache import CachedSession
 from serpapi import GoogleSearch
 
 
@@ -15,8 +15,7 @@ class Image(abc.ABC):
         self.query = endpoint
         self.time = 604800
         self.cache = CachedSession(
-            cache_name=f"cache/{directory}",
-            expire_after=self.time
+            cache_name=f"cache/{directory}", expire_after=self.time
         )
 
     @property
@@ -25,7 +24,7 @@ class Image(abc.ABC):
         """Return a list of images urls."""
 
 
-class ImageBing(Image):
+class ImageBingLimited(Image):
     """Class to get images urls from Bing engine."""
 
     def __init__(self, endpoint: str, directory: str):
@@ -41,7 +40,8 @@ class ImageBing(Image):
         )
         return links
 
-class ImageAzure(Image):
+
+class ImageBing(Image):
     """Class to get images urls from OFICIAL Bing engine"""
 
     def __init__(self, endpoint: str, key: str, endpoint_key: str, directory: str):
