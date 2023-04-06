@@ -2,7 +2,6 @@ import abc
 from random import randint
 from typing import Dict, List
 
-import requests
 from bing_image_urls import bing_image_urls
 from requests_cache import CachedSession
 from serpapi import GoogleSearch
@@ -11,12 +10,9 @@ from serpapi import GoogleSearch
 class Image(abc.ABC):
     """Abstract class for image search engines."""
 
-    def __init__(self, endpoint: str, directory: str):
+    def __init__(self, endpoint: str):
         self.query = endpoint
         self.time = 604800
-        self.cache = CachedSession(
-            cache_name=f"cache/{directory}", expire_after=self.time
-        )
 
     @property
     @abc.abstractclassmethod
@@ -27,8 +23,11 @@ class Image(abc.ABC):
 class ImageBingLimited(Image):
     """Class to get images urls from Bing engine."""
 
-    def __init__(self, endpoint: str, directory: str):
-        super().__init__(endpoint, directory)
+    def __init__(self, endpoint: str):
+        super().__init__(endpoint)
+        self.cache = CachedSession(
+            cache_name=".cache/BingLimited", expire_after=self.time
+        )
 
     @property
     def images(self) -> List[str]:
@@ -44,8 +43,9 @@ class ImageBingLimited(Image):
 class ImageBing(Image):
     """Class to get images urls from OFICIAL Bing engine"""
 
-    def __init__(self, endpoint: str, key: str, endpoint_key: str, directory: str):
-        super().__init__(endpoint, directory)
+    def __init__(self, endpoint: str, key: str, endpoint_key: str):
+        super().__init__(endpoint)
+        self.cache = CachedSession(cache_name=".cache/Bing", expire_after=self.time)
         self.__KEY: str = key
         self.__ENDPOINT: str = endpoint_key
         self.__HEADERS: str = {"Ocp-Apim-Subscription-Key": self.__KEY}
@@ -70,9 +70,10 @@ class ImageBing(Image):
 class ImageGoogle(Image):
     """Class to get images urls from Google engine."""
 
-    def __init__(self, endpoint: str, key: str, directory: str):
-        super().__init__(endpoint, directory)
+    def __init__(self, endpoint: str, key: str):
+        super().__init__(endpoint)
         self.__KEY: str = key
+        self.cache = CachedSession(cache_name=".cache/Google", expire_after=self.time)
 
     @property
     def images(self) -> List[str]:

@@ -19,7 +19,7 @@ class TestComponent(unittest.TestCase):
         self.my_dep = Endpoint.san_vicente.value
         self.zip = Zipcode(self.my_dep)
         self.image_bing = ImageBingLimited(self.my_dep)
-        self.image_azure = ImageBing(self.my_dep, A_KEY, ENDPOINT, "azure")
+        self.image_azure = ImageBing(self.my_dep, A_KEY, ENDPOINT)
         self.image_google = ImageGoogle(self.my_dep, G_KEY)
 
     def test_enumeration(self):
@@ -41,13 +41,12 @@ class TestComponent(unittest.TestCase):
         """
         self.assertNotEqual(self.zip.codes, None)
 
-    @unittest.skip("Fix hierarchy of classes")
-    def test_bing_images(self):
+    def test_binglimited_images(self):
         """Test if result are not None or empty array."""
         self.assertNotEqual(self.image_bing.images, None)
         self.assertNotEqual(self.image_bing.images, [])
 
-    def test_azure_images(self):
+    def test_bing_images(self):
         """Test if result are not None or empty array."""
         self.assertNotEqual(self.image_azure.images, None)
         self.assertNotEqual(self.image_azure.images, [])
