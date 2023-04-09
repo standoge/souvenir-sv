@@ -1,6 +1,7 @@
 import abc
 from random import randint
 from typing import Dict, List
+from datetime import timedelta
 
 from bing_image_urls import bing_image_urls
 from requests_cache import CachedSession
@@ -12,7 +13,7 @@ class Image(abc.ABC):
 
     def __init__(self, endpoint: str):
         self.query = endpoint
-        self.time = 604800
+        self.time = timedelta(days=7)
 
     @property
     @abc.abstractclassmethod
