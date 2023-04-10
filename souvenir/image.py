@@ -1,4 +1,5 @@
 import abc
+from datetime import timedelta
 from random import randint
 from typing import Dict, List
 
@@ -12,7 +13,7 @@ class Image(abc.ABC):
 
     def __init__(self, endpoint: str):
         self.query = endpoint
-        self.time = 604800
+        self.time = timedelta(days=7)
 
     @property
     @abc.abstractclassmethod
