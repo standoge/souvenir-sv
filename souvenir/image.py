@@ -1,7 +1,7 @@
 import abc
+from datetime import timedelta
 from random import randint
 from typing import Dict, List
-from datetime import timedelta
 
 from bing_image_urls import bing_image_urls
 from requests_cache import CachedSession
