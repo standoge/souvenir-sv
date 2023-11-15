@@ -71,7 +71,6 @@ class Zipcode:
             return None
 
         for i in range(1, municipalities_count):
-
             munname = tuples[i].find("td").text
             municipalities[munname] = tuples[i].find_all("td")[3].text
 
