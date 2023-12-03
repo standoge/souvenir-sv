@@ -1,4 +1,10 @@
+<div aling="center">
+ 
 [![publish](https://github.com/standoge/souvenir-sv/actions/workflows/publish.yml/badge.svg)](https://github.com/standoge/souvenir-sv/actions/workflows/publish.yml)
+<img src="https://img.shields.io/badge/pip-v.2.14.0-blue" display="inline-block" />
+
+</div>
+
 
 # El Salvador souvenir
 
