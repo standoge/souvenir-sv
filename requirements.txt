@@ -84,7 +84,7 @@ platformdirs==2.6.0
     # via
     #   -r requirements.in
     #   requests-cache
-requests==2.28.1
+requests==2.31.0
     # via
     #   -r requirements.in
     #   google-search-results
@@ -118,7 +118,7 @@ url-normalize==1.4.3
     # via
     #   -r requirements.in
     #   requests-cache
-urllib3==1.26.13
+urllib3>=1.26.18
     # via
     #   -r requirements.in
     #   requests
