@@ -1,7 +1,7 @@
 <div aling="center">
  
 [![publish](https://github.com/standoge/souvenir-sv/actions/workflows/publish.yml/badge.svg)](https://github.com/standoge/souvenir-sv/actions/workflows/publish.yml)
-<img src="https://img.shields.io/badge/pip-v.2.14.0-blue" display="inline-block" />
+<img src="https://img.shields.io/badge/pip-v.2.1.5-blue" display="inline-block" />
 
 </div>
 
@@ -69,7 +69,6 @@ You must expect a dictionary like this.
 You can check package's documentation from author's repositories.
 [ImageBingLimited](https://github.com/ffreemt/bing-image-urls) and [ImageGoogle](https://github.com/arrrlo/Google-Images-Search). [ImageBing](https://learn.microsoft.com/en-us/bing/search-apis/bing-image-search/reference/endpoints?source=recommendations) is an implementation of the official Bing Search Web API. The latter class (ImageBing) have implement cache (1 week) so you can be more efficient with your requests.
 
-> [!Note]
 > ImageGoogle & ImageAzure scraper requires an API Key to work, which means that you have to sign in on the author's package website to get access to the scraper. ImageBing does not need it.
 
 ```python
@@ -86,7 +85,6 @@ google_images:List[Dict[str]] = ImageGoogle(my_department,api_key).images
 bing_images_api:List[str] = ImageBing(my_department,api_key,endpoint)
 ```
 
-> [!Note]
 > `endpoint` parameter of ImageBing is necessary to specify that images are to be searched for. To search for another resource, another endpoint must be used. Check official documentation.
 
 ----
